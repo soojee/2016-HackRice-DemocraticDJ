@@ -35,6 +35,16 @@ h2 {
     padding-right: 230px;
 }
 
+p {
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);   
+    font-family: 'Lucida Fax', Georgia, Helvetica, Arial, sans-serif;
+    text-align: center; 
+    font-size: 1.7em;  
+}
+
 a {
     color: #545151;    
 }
@@ -45,6 +55,7 @@ ul {
     padding: 0;
     
 }
+
 
 #nav-links {
     position: absolute;
