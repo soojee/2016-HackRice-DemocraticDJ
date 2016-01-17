@@ -4,19 +4,46 @@
 var spotifyListApp = angular.module('spotifyListApp', []);
 
 spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', function($scope, $sce, $http) {
-  $scope.songs = [
+  $scope.songs = null;
+  function refreshSongList(){
+    $.get('/songs').then(function(data) {
+      $scope.$apply(function() {
+        $scope.songs = data;
+      });
+    });
+  }
+  refreshSongList();
+/*[
       {'name': 'Bad Blood', 'votes': 0},
       {'name': 'Hello', 'votes': 0},
       {'name': 'Payphone', 'votes': 0}
-  ];
+  ];*/
   $scope.sortChoice = '-votes';
   $scope.url = null;
   $scope.searchResults = [];
 
-  $scope.upvote = function(id) {
+  $scope.upvote = function(song) {
     // TODO: how are songs' changes reflected from Mongo to frontend?
-    $http.put('/songs/up', id).success(function() {
-      console.log('upvoted succesfully');
+    $.ajax({
+      url: '/songs/up',
+      type: 'PUT',
+      data: {'songID': song.songID},
+      success: function(data){
+        //TODO
+        console.log(data);
+        refreshSongList();
+        /*var index = null;
+        $scope.songs.find(function callback(el, ind, ary) {
+          if (el.songID = song.songID) index = ind;
+          return;
+        });
+        console.log(index);*/
+      },
+      failure: function() {
+        console.log('error');
+      }
+    }).then(function() {
+      refreshSongList();
     })
   }
 
@@ -41,11 +68,25 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
   }
 
   $scope.queue = function(result) {
-    $.post('localhost:9000/songs', result, function success(data) {
-      console.log('success');
+    $.post('/songs', result, function success(data) {
+      console.log('refresh on enqueue');
+      refreshSongList();
     });
     // TODO: updating view
   }
 
-     $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songsearch /*4th1RQAelzqgY7wL53UGQt"*/);
+  $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songsearch /*4th1RQAelzqgY7wL53UGQt"*/);
+
+
 }]);
+
+
+/*angular.module('queueServices', ['ngResource']).
+  factory('songSchema', function($resource) {
+    return $resource('/songs', {}, {
+      query: { method: 'GET', isArray: true}
+    })
+  });
+*/
+
+

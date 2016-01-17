@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/app.css">
   <script src="js/angular.js"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-resource.min.js"></script>
   <script type="text/javascript" src="js/controllers.js"></script>
 </head>
 <body ng-controller="SpotifySongList">
@@ -24,8 +25,8 @@
 
   <div id="queue">
     <span class="row" ng-repeat="song in songs | orderBy:sortChoice">
-      <span class="col-md-6"><span>{{song.name}} by {{song.artist}} with {{song.votes}} votes</span></span>
-      <span class="col-md-6"><button ng-click="upvote(song.id)">upvote</button>
+      <span class="col-md-6"><span>{{song.name}} by {{song.artist}} with {{song.rating}} votes</span></span>
+      <span class="col-md-6"><button ng-click="upvote(song)">upvote</button>
     </span>
   </div>
   </center>
