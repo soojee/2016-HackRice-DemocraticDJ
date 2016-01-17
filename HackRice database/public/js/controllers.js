@@ -22,9 +22,9 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
   var playlistHead = 0;
 
   $scope.nextTrack = function() {
-    $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songs[playlistHead++].songID);
-    $.post('/removeSong', {'songID': $scope.songs[playlistHead++].songID}, function success() {
-      console.log('removed ' + $scope.songs[playlistHead].name + " with rating of " + $scope.songs[playlistHead++].rating);
+    $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songs[0].songID);
+    $.post('/removeSong', {'songID': $scope.songs[0].songID}, function success() {
+      console.log('removed ' + $scope.songs[0].name + " with rating of " + $scope.songs[0].rating);
       refreshSongList();
     });
   }
