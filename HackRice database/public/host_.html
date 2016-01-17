@@ -24,8 +24,36 @@
 
 </head>
 <body ng-controller="SpotifySongList">
-  <center>
-  <iframe id="player" ng-src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><button ng-click='nextTrack()'>next</button>
+  <div class="container">
+
+    <a href="index.html"><h1 id="pages-title" class="text-shadow-blue">DEMOCRATIC DJ</h1></a>
+    <div class="col-sm-2 col-sm-offset-1 blog-sidebar">    
+
+        <div id="sidebar-links">
+            <ul>
+                <li><div class="sidebar-button"><a href="index.html" role="button">home</a></div></li>
+                <li><div class="sidebar-button"><a href="#" role="button">save playlist</a></div></li>
+                <li><div class="sidebar-button"><a href="#" role="button">end session</a></div></li>
+
+            </ul>
+        </div><!-- #.sidebar-links -->
+        <img id="badge" src="../img/heydj.png">
+    </div><!-- /.blog-sidebar -->
+
+    <div class="col-sm-6">
+
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Find</button>
+            </span>
+        </div><!-- ./input-group -->
+        
+        
+        <!-- PUT WEB PLAYER -->
+        <iframe id="player" ng-src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><button ng-click='nextTrack()'>next</button>
+
+    </div><!-- /.col-sm-6 -->
 
   <div id="spotifyPlayer">
     <input type="text" ng-model="songsearch"><button id='submit' ng-click='search()'>submit</button>

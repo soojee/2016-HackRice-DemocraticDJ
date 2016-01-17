@@ -2,16 +2,31 @@
 <html lang="en" ng-app="spotifyListApp">
 <head>
   <meta charset="utf-8">
-  <title>My HTML File</title>
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+
+  <title>Democratic DJ</title>
+
+  <meta name="description" content="Collaborative playlist">
+  <meta name="authors" content="Benjamin Lee, Caroline Shi, Joshua Pham, Scott Huang, Soojee Chung">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/app.css">
-  <script src="bower_components/angular/angular.js"></script>
+  <script src="js/angular.js"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-resource.min.js"></script>
   <script type="text/javascript" src="js/controllers.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
 </head>
 <body ng-controller="SpotifySongList">
   <center>
-  <iframe id="player" ng-src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+  <iframe id="player" ng-src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><button ng-click='nextTrack()'>next</button>
+
   <div id="spotifyPlayer">
     <input type="text" ng-model="songsearch"><button id='submit' ng-click='search()'>submit</button>
   </div>
@@ -23,11 +38,15 @@
   </div>
 
   <div id="queue">
-    <span class="row" ng-repeat="song in songs | orderBy:sortChoice">
-      <span class="col-md-6"><span>{{song.name}} by {{song.artist}} with {{song.votes}} votes</span></span>
-      <span class="col-md-6"><button ng-click="upvote(song.id)">upvote</button>
+    <span class="row" ng-repeat="song in songs">
+      <span class="col-md-6"><span>{{song.name}} by {{song.artist}} with {{song.rating}} votes</span></span>
+      <span class="col-md-6"><button ng-click="upvote(song)">upvote</button>
     </span>
   </div>
   </center>
+<footer class="footer">
+    <a href="https://github.com/soojee/2016-HackRice-GroupMusicDemocracy"><i class="fa fa-github"></i></a>
+</footer>
 </body>
 </html>
+

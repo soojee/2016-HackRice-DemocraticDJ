@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" ng-app="spotifyListApp">
+<head>
+  <meta charset="utf-8">
+  <title>My HTML File</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="js/angular.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="js/controllers.js"></script>
+</head>
+<body ng-controller="SpotifySongList">
+  <center>
+  <iframe id="player" ng-src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+  <div id="spotifyPlayer">
+    <input type="text" ng-model="songsearch"><button id='submit' ng-click='search()'>submit</button>
+  </div>
+  
+  <div id="search-results">
+    <span ng-repeat="result in searchResults">
+      <a href ng-click="queue(result)"><p>{{result.name}} by {{result.artist}}</p></a>
+    </span>
+  </div>
+
+  <div id="queue">
+    <span class="row" ng-repeat="song in songs | orderBy:sortChoice">
+      <span class="col-md-6"><span>{{song.name}} by {{song.artist}} with {{song.votes}} votes</span></span>
+      <span class="col-md-6"><button ng-click="upvote(song.id)">upvote</button>
+    </span>
+  </div>
+  </center>
+</body>
+</html>

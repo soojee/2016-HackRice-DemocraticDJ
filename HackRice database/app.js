@@ -7,7 +7,8 @@ var express = require("express"),
 mongoose.connect("mongodb://localhost/spotifye");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
-// app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 //Schema setup
 var songSchema = new mongoose.Schema({ 
@@ -21,8 +22,20 @@ var Song = mongoose.model("Song", songSchema);
 
 //Routes
 app.get('/', function(req, res){
-    res.render('index.html');
+    res.render('index');
 });
+
+app.get('/about', function(req, res){
+    res.render('about');
+});
+
+app.get('/host', function(req, res){
+    res.render('host_');
+})
+
+app.get('/friend', function(req, res){
+    res.render('friend');
+})
 
 //List all songs
 app.get('/songs', function(req, res){
