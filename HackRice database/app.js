@@ -6,13 +6,14 @@ var express = require("express"),
     
 mongoose.connect("mongodb://localhost/spotifye");
 app.use(bodyParser.urlencoded({extended: true}));
-app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
+// app.set('view engine', 'ejs');
 
 //Schema setup
 var songSchema = new mongoose.Schema({ 
     name: String,
     songID: String,
-    playlist: String,
+    artist: String,
     rating: Number
 });
 
@@ -20,7 +21,7 @@ var Song = mongoose.model("Song", songSchema);
 
 //Routes
 app.get('/', function(req, res){
-    res.render("home");
+    res.render('index.html');
 });
 
 //List all songs
@@ -37,7 +38,9 @@ app.get('/songs', function(req, res){
 //Add new song
 app.post('/songs', function(req, res){
     var songName = req.body.songName;
-    var params = {name: songName, songID: "spotify:track:0hgsUnkawqDllP4OF4g9MN", playlist: "ABC", rating: 1}
+    var songId = req.body.id;
+    var songArtist = req.body.artist;
+    var params = {name: songName, songID: "spotify:track:" + songId, artist: songArtist, rating: 1}
     Song.create(params, function(err, newSong){
         if(err){
             console.log("Error");
@@ -59,23 +62,6 @@ app.put('/songs/up', function(req, res){
     });
 });
 
-//Downvote
-app.put('/songs/down', function(req, res){
-    var songToDown = req.body.songID;
-    Song.find({songID: songToDown}, function(err, song){
-        if(err){
-            console.log("Error");
-        } else {
-            song.rating = song.rating - 1;
-        }
-    });
-});
-
-
-//Methods
-function rearrange(){
-    
-}
 
 app.listen(3000, function(){
      console.log("Server started!");
