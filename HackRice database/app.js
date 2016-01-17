@@ -49,6 +49,15 @@ app.post('/songs', function(req, res){
     });
 });
 
+//Remove song once finished playing
+app.post('/removeSong', function(req, res) {
+    Song.remove({'songID': req.body.songID}, function(err) {
+        if (err) console.log(err);
+        else
+            res.send();
+    });
+});
+
 //Upvote
 app.put('/songs/up', function(req, res){
     var songURI = req.body.songID;

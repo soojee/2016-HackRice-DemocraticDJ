@@ -8,19 +8,26 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
   function refreshSongList(){
     $.get('/songs').then(function(data) {
       $scope.$apply(function() {
-        $scope.songs = data;
+        $scope.songs = data.sort(function(a,b) {
+          return b.rating - a.rating;
+        });
       });
     });
   }
   refreshSongList();
-/*[
-      {'name': 'Bad Blood', 'votes': 0},
-      {'name': 'Hello', 'votes': 0},
-      {'name': 'Payphone', 'votes': 0}
-  ];*/
-  $scope.sortChoice = '-votes';
+
   $scope.url = null;
   $scope.searchResults = [];
+
+  var playlistHead = 0;
+
+  $scope.nextTrack = function() {
+    $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songs[playlistHead++].songID);
+    $.post('/removeSong', {'songID': $scope.songs[playlistHead++].songID}, function success() {
+      console.log('removed ' + $scope.songs[playlistHead].name + " with rating of " + $scope.songs[playlistHead++].rating);
+      refreshSongList();
+    });
+  }
 
   $scope.upvote = function(song) {
     // TODO: how are songs' changes reflected from Mongo to frontend?
@@ -48,6 +55,7 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
   }
 
   $scope.search = function() {
+    // TODO: dedupe.
     $.ajax({
       url: "https://api.spotify.com/v1/search?q=" + $scope.songsearch.split(' ').join('%20') + "&type=track",
       type: "GET",
@@ -74,8 +82,6 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
     });
     // TODO: updating view
   }
-
-  $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songsearch /*4th1RQAelzqgY7wL53UGQt"*/);
 
 
 }]);

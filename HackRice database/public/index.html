@@ -12,7 +12,8 @@
 </head>
 <body ng-controller="SpotifySongList">
   <center>
-  <iframe id="player" ng-src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+  <iframe id="player" ng-src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><button ng-click='nextTrack()'>next</button>
+  
   <div id="spotifyPlayer">
     <input type="text" ng-model="songsearch"><button id='submit' ng-click='search()'>submit</button>
   </div>
@@ -24,7 +25,7 @@
   </div>
 
   <div id="queue">
-    <span class="row" ng-repeat="song in songs | orderBy:sortChoice">
+    <span class="row" ng-repeat="song in songs">
       <span class="col-md-6"><span>{{song.name}} by {{song.artist}} with {{song.rating}} votes</span></span>
       <span class="col-md-6"><button ng-click="upvote(song)">upvote</button>
     </span>
