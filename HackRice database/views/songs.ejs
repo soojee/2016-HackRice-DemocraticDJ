@@ -1,0 +1,16 @@
+<h1>Queue</h1>
+
+<form action="/songs" method="POST">
+    <input type="text" name="songName" placeholder="Enter artist, songs, album, etc">
+    <button>SUBMIT!</button>
+</form>
+
+<% songs.forEach(function(songs){ %>
+    <h2> <%= songs.name %> </h2>
+    <h2> <%= songs.rating %> </h2>
+<% }); %>
+
+<!--<form action="/songs" method="PUT">-->
+<!--    <input type="text" name="songUp" placeholder="Enter song to upvote">-->
+<!--    <button>Submit!</button>-->
+<!--</form>-->
