@@ -19,8 +19,6 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
   $scope.url = null;
   $scope.searchResults = [];
 
-  var playlistHead = 0;
-
   $scope.nextTrack = function() {
     $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songs[0].songID);
     $.post('/removeSong', {'songID': $scope.songs[0].songID}, function success() {
