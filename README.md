@@ -8,10 +8,10 @@ Source code for the Democratic DJ web application created for HackRice 2016.
 * Front-end primarily implemented in HTML, CSS, AngularJS
 * Back-end implemented using Node.js, Express, MongoDB
 
-###About
+##About
 When music meets freedom! Democratic DJ is a fun and interactive web application to remedy group situations in which no one can reach a consensus on what to listen to.
 
-##How to Use
+###How to Use
 **For party hosts**
 * Click host and log in with Spotify to create a room for your cool partay
 * Tell your friends that you trust them with the ability to contribute their music taste to the playlist like the good friend that you are
