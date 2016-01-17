@@ -5,10 +5,8 @@ body {
     margin-bottom: 60px;
 }
 
-h1{
-    
+h1{    
     padding-top: 90px;
-
     font-family: 'Gill Sans';
     font-size: 7.2em;
     color: white;
@@ -58,10 +56,6 @@ ul {
 
 
 #nav-links {
-    position: absolute;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%,-50%);   
     font-family: 'Lucida Fax', Georgia, Helvetica, Arial, sans-serif;
     text-align: center; 
     font-size: 2.19em;  
@@ -74,9 +68,17 @@ ul {
     height:100%;    
 }
 
+#nav-links li {
+    display: block;
+    vertical-align: middle;
+
+}
+
+
 a:hover, a:active {
     color: #908e8e;
     text-decoration: none;
+    background-color: pink;
 }
 
 .footer {
