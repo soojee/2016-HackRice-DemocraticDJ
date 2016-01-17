@@ -19,11 +19,15 @@
     padding-top: 30px;
 }
 
-.text-shadow-light {
+.text-shadow-blue {
     text-shadow: -5px 5px 0 #6dcff6;
+}
+
+.text-shadow-pink {
+    text-shadow: -5px 5px 0 #ffc0cb;
 }
 
 #web-player {
     padding-top: 20px;
-    
+
 }
