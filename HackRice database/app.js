@@ -30,36 +30,37 @@ app.get('/songs', function(req, res){
         if(err){
             console.log("Error");
         } else{
-            res.render("songs", {songs: allSongs});
+            res.json(allSongs);
         }
     });
 });
 
 //Add new song
 app.post('/songs', function(req, res){
-    var songName = req.body.songName;
+    console.log(req.body);
+    var songName = req.body.name;
     var songId = req.body.id;
     var songArtist = req.body.artist;
-    var params = {name: songName, songID: "spotify:track:" + songId, artist: songArtist, rating: 1}
+    var params = {name: songName, songID: songId, artist: songArtist, rating: 1}
     Song.create(params, function(err, newSong){
-        if(err){
+        if(err)
             console.log("Error");
-        } else {
-            res.redirect('/songs');
-        }
+        res.send(newSong);
     });
 });
 
 //Upvote
 app.put('/songs/up', function(req, res){
-    var songToUp = req.body.songUp;
-     Song.find({name: songToUp}, function(err, song){
+    var songURI = req.body.songID;
+    console.log(req.body);
+    Song.update({"songID": songURI}, {$inc: {'rating': 1}}, {multi: true}, function(err,song){
         if(err){
             console.log("Error");
         } else {
-            song.rating = song.rating + 1;
+            res.send(song);
         }
-    });
+    }
+    );
 });
 
 
