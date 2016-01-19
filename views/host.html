@@ -1,63 +1,62 @@
 <!doctype html>
-
-<html lang="en">
+<html lang="en" ng-app="spotifyListApp">
 <head>
   <meta charset="utf-8">
 
   <title>Democratic DJ</title>
+
   <meta name="description" content="Collaborative playlist">
   <meta name="authors" content="Benjamin Lee, Caroline Shi, Joshua Pham, Scott Huang, Soojee Chung">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/pages.css">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/app.css">
+
+
+  <script src="js/angular.js"></script>
+  <script type="text/javascript" src="js/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/angular-resource.min.js"></script>
+
+
+  <script type="text/javascript" src="js/bootstrap3-typeahead.min.js"></script>
+  <script type="text/javascript" src="js/controllers.js"></script>
+
+
 </head>
+<body ng-controller="SpotifySongList">
+  <div class="container">
 
-<body>
-    <div class="container">
+    <a href="index.html"><h1 id="pages-title" class="text-shadow-blue">DEMOCRATIC DJ</h1></a>
+    <div class="col-sm-2 col-sm-offset-1 blog-sidebar">    
+
+        <div id="sidebar-links">
+            <ul>
+                <li><div class="sidebar-button"><a href="index.html" role="button">home</a></div></li>
+                <li><div class="sidebar-button"><a href="#" role="button">save playlist</a></div></li>
+                <li><div class="sidebar-button"><a href="#" role="button">end session</a></div></li>
+
+            </ul>
+        </div><!-- #.sidebar-links -->
+        <img id="badge" src="../img/heydj.png">
+    </div><!-- /.blog-sidebar -->
+
+    <div class="col-sm-6">
+        <center>
+        <input class='typeahead' type="text" data-provide="typeahead">
       
-        <a href="index.html"><h1 id="pages-title" class="text-shadow-blue">DEMOCRATIC DJ</h1></a>
-        <div class="col-sm-2 col-sm-offset-1 blog-sidebar">    
+        <!-- PUT WEB PLAYER -->
+        <iframe id="player" ng-src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><button ng-click='nextTrack()'>next</button>
+        </center>
 
-            <div id="sidebar-links">
-                <ul>
-                    <li><div class="sidebar-button"><a href="index.html" role="button">home</a></div></li>
-                    <li><div class="sidebar-button"><a href="#" role="button">save playlist</a></div></li>
-                    <li><div class="sidebar-button"><a href="#" role="button">end session</a></div></li>
-
-                </ul>
-            </div><!-- #.sidebar-links -->
-            <img id="badge" src="../img/heydj.png">
-        </div><!-- /.blog-sidebar -->
-
-        <div class="col-sm-6">
-
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Find</button>
-                </span>
-            </div><!-- ./input-group -->
-            
-            
-            <!-- PUT WEB PLAYER -->
-            <iframe id="web-player" src="https://embed.spotify.com/?uri=spotify:track:4th1RQAelzqgY7wL53UGQt" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-
-        </div><!-- /.col-sm-6 -->
-
-
-    </div><!-- /.container -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-</body>
-
+    </div><!-- /.col-sm-6 -->
 <footer class="footer">
     <a href="https://github.com/soojee/2016-HackRice-GroupMusicDemocracy"><i class="fa fa-github"></i></a>
 </footer>
-
+</body>
 </html>
+
