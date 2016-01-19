@@ -18,6 +18,9 @@
   <script src="js/angular.js"></script>
   <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
   <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-resource.min.js"></script>
+
+
+    <script type="text/javascript" src="js/bootstrap3-typeahead.min.js"></script>
   <script type="text/javascript" src="js/controllers.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
@@ -41,21 +44,21 @@
     </div><!-- /.blog-sidebar -->
 
     <div class="col-sm-6">
-
-        <div class="input-group">
+        <center>
+        <input class='typeahead' type="text" data-provide="typeahead">
+        <!-- <div class="input-group">
             <input ng-model="songsearch" type="text" class="form-control" placeholder="Search for...">
             <span class="input-group-btn">
                 <button class="btn btn-default" ng-click='search()' type="button">Find</button>
             </span>
         </div><!-- ./input-group -->
                   
-        <div id="search-results" class="panel panel-default">
+        <!-- <div id="search-results" class="panel panel-default">
           <div class="panel-body">
               <p ng-click="queue(result)" ng-repeat="result in searchResults">{{result.name}} by {{result.artist}}</p>
           </div>
-        </div>
-        
-        <center>
+        </div> -->
+      
         <!-- PUT WEB PLAYER -->
         <iframe id="player" ng-src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><button ng-click='nextTrack()'>next</button>
         </center>

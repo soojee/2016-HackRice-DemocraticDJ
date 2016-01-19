@@ -81,6 +81,51 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
     // TODO: updating view
   }
 
+  // search autocompletes but upon delay, to prevent overloading Spotify API with requests
+  var timeouts = [];
+  $('.typeahead').typeahead({
+    delay: 300,
+    source: function(q, cb) {
+
+
+      $.ajax({
+        url: "https://api.spotify.com/v1/search?q=" + q.split(' ').join('%20') /*$scope.songsearch.split(' ').join('%20')*/ + "&type=track",
+        type: "GET",
+        success: function(data) {
+          var results = data.tracks.items.map(function(item) {
+            return {
+              'name': item.name,
+              'id': item.id,
+              'artist': item.artists[0].name
+            }
+          });
+          cb(results);
+
+/*            $scope.$apply(function() {$scope.searchResults = [];});
+          var length = data.tracks.items.length;
+          for(var i = 0; i < length; i++) {
+            $scope.$apply(function() {
+              $scope.searchResults.push({
+                'name': data.tracks.items[i].name,
+                'id': data.tracks.items[i].id,
+                'artist': data.tracks.items[i].artists[0].name
+              });
+           });
+          }*/
+        }
+      });
+    },
+    displayText: function(item) {
+      return item.name + ' by ' + item.artist;
+    },
+    updater: function(item) {
+      $.post('/songs', item, function success(data) {
+        console.log('refresh on enqueue');
+        refreshSongList();
+      });
+    }
+  });
+
 
 }]);
 
