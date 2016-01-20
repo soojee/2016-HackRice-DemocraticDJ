@@ -30,7 +30,7 @@ app.get('/about', function(req, res){
 });
 
 app.get('/host', function(req, res){
-    res.render('host_');
+    res.render('host');
 })
 
 app.get('/friend', function(req, res){

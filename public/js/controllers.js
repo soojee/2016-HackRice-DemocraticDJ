@@ -5,25 +5,30 @@ var spotifyListApp = angular.module('spotifyListApp', []);
 
 spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', function($scope, $sce, $http) {
   $scope.songs = null;
-  function refreshSongList(){
+  function refreshSongList(callback){
     $.get('/songs').then(function(data) {
       $scope.$apply(function() {
         $scope.songs = data.sort(function(a,b) {
           return b.rating - a.rating;
         });
       });
+      if (callback != null) {
+        callback()
+      }
     });
   }
-  refreshSongList();
 
   $scope.url = null;
-  $scope.searchResults = [];
+  refreshSongList(function() {
+    $scope.$apply(function() {
+      $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songs[0].songID);
+    });
+  });
 
   $scope.nextTrack = function() {
-    $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songs[0].songID);
     $.post('/removeSong', {'songID': $scope.songs[0].songID}, function success() {
-      console.log('removed ' + $scope.songs[0].name + " with rating of " + $scope.songs[0].rating);
-      refreshSongList();
+      $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songs[0].songID);
+      refreshSongList(null);
     });
   }
 
@@ -36,7 +41,7 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
       success: function(data){
         //TODO
         console.log(data);
-        refreshSongList();
+        refreshSongList(null);
         /*var index = null;
         $scope.songs.find(function callback(el, ind, ary) {
           if (el.songID = song.songID) index = ind;
@@ -48,41 +53,18 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
         console.log('error');
       }
     }).then(function() {
-      refreshSongList();
+      refreshSongList(null);
     })
-  }
-
-  $scope.search = function() {
-    // TODO: dedupe.
-    $.ajax({
-      url: "https://api.spotify.com/v1/search?q=" + $scope.songsearch.split(' ').join('%20') + "&type=track",
-      type: "GET",
-      success: function(data) {
-        $scope.$apply(function() {$scope.searchResults = [];});
-        var length = data.tracks.items.length;
-        for(var i = 0; i < length; i++) {
-          $scope.$apply(function() {
-            $scope.searchResults.push({
-              'name': data.tracks.items[i].name,
-              'id': data.tracks.items[i].id,
-              'artist': data.tracks.items[i].artists[0].name
-            });
-         });
-        }
-      }
-    });
   }
 
   $scope.queue = function(result) {
     $.post('/songs', result, function success(data) {
       console.log('refresh on enqueue');
-      refreshSongList();
+      refreshSongList(null);
     });
     // TODO: updating view
   }
 
-  // search autocompletes but upon delay, to prevent overloading Spotify API with requests
-  var timeouts = [];
   $('.typeahead').typeahead({
     delay: 300,
     source: function(q, cb) {
@@ -100,19 +82,8 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
             }
           });
           cb(results);
-
-/*            $scope.$apply(function() {$scope.searchResults = [];});
-          var length = data.tracks.items.length;
-          for(var i = 0; i < length; i++) {
-            $scope.$apply(function() {
-              $scope.searchResults.push({
-                'name': data.tracks.items[i].name,
-                'id': data.tracks.items[i].id,
-                'artist': data.tracks.items[i].artists[0].name
-              });
-           });
-          }*/
         }
+
       });
     },
     displayText: function(item) {
@@ -128,14 +99,3 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
 
 
 }]);
-
-
-/*angular.module('queueServices', ['ngResource']).
-  factory('songSchema', function($resource) {
-    return $resource('/songs', {}, {
-      query: { method: 'GET', isArray: true}
-    })
-  });
-*/
-
-

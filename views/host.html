@@ -47,10 +47,16 @@
 
     <div class="col-sm-6">
         <center>
-        <input class='typeahead' type="text" data-provide="typeahead">
+        <input style="display:block;margin-bottom:30px;" class='typeahead' type="text" data-provide="typeahead">
       
         <!-- PUT WEB PLAYER -->
-        <iframe id="player" ng-src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe><button ng-click='nextTrack()'>next</button>
+        <table id="player_cont">
+          <tr>
+            <td><iframe id="player" ng-src="{{url}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe></td>
+            <td><button ng-click='nextTrack()'>next</button></td>
+          </tr>
+        </table>
+        
         </center>
 
     </div><!-- /.col-sm-6 -->

@@ -41,6 +41,12 @@ Data taken from the following APIs:
 * [Spotify API](http://spotify.com)
 
 
+##To-dos
+* Remove " undefined by undefined" after typeahead result is selected.
+* sorting of search results upon typeahead query. Currently results aren't ordered by rank of song.
+* clean up interface of queue… extra info about artist etc
+* single vote only. (UX - people shouldn't be allowed to skew the votes)
+
 License
 --------
 
