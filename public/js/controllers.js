@@ -27,8 +27,11 @@ spotifyListApp.controller('SpotifySongList', ['$scope', '$sce', '$http', functio
 
   $scope.nextTrack = function() {
     $.post('/removeSong', {'songID': $scope.songs[0].songID}, function success() {
-      $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songs[0].songID);
-      refreshSongList(null);
+      refreshSongList(function() {
+        $scope.$apply(function() {
+          $scope.url = $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:" + $scope.songs[0].songID);
+        });
+      });
     });
   }
 

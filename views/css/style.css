@@ -108,3 +108,14 @@ a:hover, a:active {
     vertical-align: middle;
     padding:20px;
 }
+
+#player-next {
+    transition:.2s;
+    cursor:pointer;
+    font-size:5em;
+}
+
+#player-next:hover {
+    opacity: .7;
+}
+
