@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" ng-app="spotifyListApp">
+<head>
+  <meta charset="utf-8">
+
+  <title>Democratic DJ</title>
+
+  <meta name="description" content="Collaborative playlist">
+  <meta name="authors" content="Benjamin Lee, Caroline Shi, Joshua Pham, Scott Huang, Soojee Chung">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <!-- <link rel="stylesheet" href="css/app.css"> -->
+  <script src="js/angular.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-resource.min.js"></script>
+  <script type="text/javascript" src="js/controllers.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+</head>
+<body ng-controller="SpotifySongList">
+  <div class="container">
+
+    <a href="index.html"><h1 id="pages-title" class="text-shadow-blue">DEMOCRATIC DJ</h1></a>
+    <div class="col-sm-2 col-sm-offset-1 blog-sidebar">    
+
+        <div id="sidebar-links">
+            <ul>
+                <li><div class="sidebar-button"><a href="index.html" role="button">home</a></div></li>
+                <li><div class="sidebar-button"><a href="#" role="button">save playlist</a></div></li>
+                <li><div class="sidebar-button"><a href="#" role="button">end session</a></div></li>
+
+            </ul>
+        </div><!-- #.sidebar-links -->
+        <img id="badge" src="../img/heydj.png">
+    </div><!-- /.blog-sidebar -->
+
+    <div class="col-sm-6">
+
+      <div class="input-group">
+        <input type="text" class="form-control" ng-model="songsearch">
+        <span class="input-group-btn">
+            <button class="btn btn-default" ng-click="search()" type="button">Find</button>
+        </span>
+      </div><!-- ./input-group -->
+    
+      <div id="search-results">
+      <span ng-repeat="result in searchResults">
+        <a href ng-click="queue(result)"><p>{{result.name}} by {{result.artist}}</p></a>
+      </span>
+    </div>
+
+    <div id="playlist">
+      <table class="table table-lower">
+        <thead>
+          <th>Vote</th>
+          <th>Album Cover</th>
+          <th>Track</th>
+          <th>Artist</th>
+          <th>Album</th>
+        </thead>
+        <tbody>
+          <tr ng-click="upvote(song)" ng-repeat="song in songs">
+            <td>{{song.rating}}</td>
+            <td>{{song.name}}</td>
+            <td>{{song.artist}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+<footer class="footer">
+    <a href="https://github.com/soojee/2016-HackRice-GroupMusicDemocracy"><i class="fa fa-github"></i></a>
+</footer>
+</body>
+</html>
+
