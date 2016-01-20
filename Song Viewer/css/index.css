@@ -1,0 +1,35 @@
+html {
+  background-color: #5d5;
+  background-color: #222;
+}
+
+p {
+  font-family: 'Lobster', cursive;
+  font-size: 40px;
+  color: #ddd;
+  text-shadow: 0 0 3px rgba(0,0,0,0.5);
+  margin: 0.4em;
+  text-align: center;
+}
+
+#bg {
+  width: 100vw;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  top: -30%;
+  left: 0;
+  -webkit-filter: blur(80px);
+  -moz-filter: blur(80px);
+  -ms-filter: blur(80px);
+  filter: blur(80px);
+  z-index: -1;
+}
+
+#album-pic {
+  width: 50%;
+  height: 50%;
+  border-radius: 5%;
+  display: block;
+  margin: 0 auto;
+}
